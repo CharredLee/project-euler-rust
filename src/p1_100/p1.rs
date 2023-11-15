@@ -12,7 +12,7 @@ pub fn multiple_sum(n: u32, limit: u32) -> u32 {    // the sum of all multiples 
 }
 
 
-pub fn p() {
+pub fn problem() {
     const LIMIT: u32 = 1000 - 1;
 
     let ans = multiple_sum(5, LIMIT) + multiple_sum(3, LIMIT) - multiple_sum(15, LIMIT);
