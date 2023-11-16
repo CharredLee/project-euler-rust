@@ -145,6 +145,7 @@ dependencies = [
  "automod",
  "fast-fibonacci",
  "proc-macro2",
+ "reikna",
  "unicode-ident",
 ]
 
@@ -162,6 +163,12 @@ name = "rawpointer"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "60a357793950651c4ed0f3f52338f53b2f809f32d83a07f72909fa13e4c6c1e3"
+
+[[package]]
+name = "reikna"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "587f2b12c725829d56d8192817535cbfe3c4b5daf294622765cec5969d980eca"
 
 [[package]]
 name = "syn"
