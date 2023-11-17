@@ -20,6 +20,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "divisors"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbb1463b94567b1d22f0e07d13a70dcc25f39f88ad8cc197ecb978efddb9136e"
+dependencies = [
+ "num",
+]
+
+[[package]]
 name = "fast-fibonacci"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -143,6 +152,7 @@ name = "project-euler-rust"
 version = "0.1.0"
 dependencies = [
  "automod",
+ "divisors",
  "fast-fibonacci",
  "proc-macro2",
  "reikna",

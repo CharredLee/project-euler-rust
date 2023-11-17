@@ -17,7 +17,6 @@ pub fn problem() {
     let mut answer: u64 = 0;
     let mut current: u64;
     for x in nums {
-        println!("{x}");
         let len = x.len();
         for start in 0..(x.len()-12) {
             let end = start + 13;
