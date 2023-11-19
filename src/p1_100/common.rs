@@ -18,3 +18,11 @@ pub fn euler_method(m: u64, n: u64) -> Vec<u64> {
     assert!(m > n);
     vec![m*m - n*n, 2*m*n, m*m+n*n]
 }
+
+pub fn collatz(n: u64) -> u64 {
+    match n % 2 {
+        0 => n / 2,
+        1 => 3 * n + 1,
+        _ => panic!()
+    }
+}
