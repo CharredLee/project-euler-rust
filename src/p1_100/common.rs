@@ -18,7 +18,3 @@ pub fn euler_method(m: u64, n: u64) -> Vec<u64> {
     assert!(m > n);
     vec![m*m - n*n, 2*m*n, m*m+n*n]
 }
-
-fn get_factors(n: u64) -> Vec<u64> { // all factors  
-    (1..n + 1).into_iter().filter(|&x| n % x == 0).collect::<Vec<u64>>()
-}
