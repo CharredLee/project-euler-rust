@@ -1,3 +1,5 @@
+use divisors::get_divisors;
+
 pub fn triangle(n: u64) -> u64 {    // the nth triangular number.
     n * (n + 1) / 2
 }
@@ -24,4 +26,9 @@ pub fn collatz(n: u64) -> u64 {
         return n / 2;
     }
     3 * n + 1
+}
+
+/// Returns the sum of all divisors of n, other than n.
+pub fn sum_proper_divisors(n: u64) -> u64 {
+    get_divisors(n).iter().sum::<u64>()
 }
