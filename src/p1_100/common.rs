@@ -20,9 +20,8 @@ pub fn euler_method(m: u64, n: u64) -> Vec<u64> {
 }
 
 pub fn collatz(n: u64) -> u64 {
-    match n % 2 {
-        0 => n / 2,
-        1 => 3 * n + 1,
-        _ => panic!()
+    if n % 2 == 0 {
+        return n / 2;
     }
+    3 * n + 1
 }
