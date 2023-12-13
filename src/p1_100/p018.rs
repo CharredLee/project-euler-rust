@@ -17,15 +17,22 @@ pub fn problem() {
     91 71 52 38 17 14 91 43 58 50 27 29 48
     63 66 04 68 89 53 67 30 73 16 69 87 40 31
     04 62 98 27 23 09 70 98 73 93 38 53 60 04 23";
-    
-    // I mean, just do this one on paper.
-    // Start with the last row.
-    // For each row above it, for each value in that row, add the maximum of the two numbers below it.
-    // e.g.:
-    // 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
-    // 63+62 66+98 04+98 68+27 89+23 53+09 67+70 30+98 73+93 16+93 69+38 87+53 40+60 31+04
-    // = 127 164 102 95 112 62 137 128 166 109 107 140 100 35
-    // etc.
-    // This will take very little effort to finish.
-    // In problem 67, we will actually implement something interesting.
+
+    let binding = data.split('\n')
+        .map(|line| {
+            line.split_whitespace()
+                .map(|s| s.parse::<u32>().unwrap())
+                .collect::<Vec<u32>>()
+            }
+        )
+        .collect::<Vec<_>>();
+    let mut values = binding.iter().rev();
+    let mut arr = values.next().unwrap().clone();
+    for row in values {
+        for (i, &val) in row.iter().enumerate() {
+            arr[i] = val + arr[i].max(arr[i+1]);
+        }
+    }
+    let answer = arr[0];
+    println!("answer: {}", answer);
 }

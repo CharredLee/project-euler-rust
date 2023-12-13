@@ -15,5 +15,5 @@ pub fn problem() {
         .chars()
         .map(|c| c.to_digit(10).unwrap())
         .sum::<u32>();
-    println!("Answer: {}", answer);
+    println!("answer: {}", answer);
 }

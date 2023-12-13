@@ -15,5 +15,5 @@ pub fn problem() {
         })
         .sum::<u64>();
     
-    println!("Answer: {}", answer);
+    println!("answer: {}", answer);
 }
