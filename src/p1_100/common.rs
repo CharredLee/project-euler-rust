@@ -1,31 +1,41 @@
 use divisors::get_divisors;
+use num::Num;
 
-pub fn triangle(n: u64) -> u64 {    // the nth triangular number.
-    n * (n + 1) / 2
+
+pub fn triangle<T: Num + Copy>(n: T) -> T {    // the nth triangular number.
+    n * (n + T::one()) / (T::one() + T::one())
 }
 
-pub fn multiple_count(n: u64, limit: u64) -> u64 {  // the number of multiples of n less than limit.
+pub fn multiple_count<T: Num + Copy>(n: T, limit: T) -> T {  // the number of multiples of n less than limit.
     limit / n
 }
 
-pub fn multiple_sum(n: u64, limit: u64) -> u64 {    // the sum of all multiples of n less than limit.
+pub fn multiple_sum<T: Num + Copy>(n: T, limit: T) -> T {    // the sum of all multiples of n less than limit.
     n * triangle(multiple_count(n, limit))
 }
 
-pub fn square_sum(n: u64) -> u64 {  // the sum of squares through n: 1^2 + ... + n^2
-    n * (n + 1) * (2*n + 1) / 6
+pub fn square_sum<T: Num + Copy>(n: T) -> T {  // the sum of squares through n: 1^2 + ... + n^2
+    n * (n + T::one()) * ((T::one()+T::one())*n + T::one()) 
+        / ((T::one() + T::one() + T::one()) * (T::one() + T::one()))
 }
 
-pub fn euler_method(m: u64, n: u64) -> Vec<u64> {
+pub fn euler_method<T: Num + Copy + PartialOrd>(m: T, n: T) -> Vec<T> {
     assert!(m > n);
-    vec![m*m - n*n, 2*m*n, m*m+n*n]
+    vec![m*m - n*n, (T::one()+T::one())*m*n, m*m+n*n]
 }
 
-pub fn collatz(n: u64) -> u64 {
-    if n % 2 == 0 {
-        return n / 2;
+pub fn collatz<T: Num + Copy>(n: T) -> T {
+    if n % (T::one() + T::one()) == T::zero() {
+        return n / (T::one() + T::one());
     }
-    3 * n + 1
+    (T::one()+T::one()+T::one()) * n + T::one()
+}
+
+pub fn factorial<T: Num + Copy>(n: T) -> T {
+    match n == T::zero() {
+        true => T::one(),
+        false => n * factorial(n - T::one())
+    }
 }
 
 /// Returns the sum of all divisors of n, other than n.
