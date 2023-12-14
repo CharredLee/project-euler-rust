@@ -1,5 +1,5 @@
 use divisors::get_divisors;
-use num::Num;
+use num::{BigInt, Num};
 
 pub const PHI: f64 = 1.618_033_988_749_895;
 
@@ -64,4 +64,22 @@ fn fibonacci_helper<T: Num + Copy>(n: T) -> (T, T) {
 
 pub fn fib<T: Num + Copy>(n: T) -> T {
     fibonacci_helper(n).0
+}
+
+fn big_fibonacci_helper(n: &BigInt) -> (BigInt, BigInt) {
+    match n == &BigInt::from(0) {
+        true => (BigInt::from(0), BigInt::from(1)),
+        false => {
+            let (x, y) = big_fibonacci_helper(&(n / 2));
+            let (z, w) = (&x * (&y + &y - &x), &x * &x + &y * &y);
+            match n % 2 == BigInt::from(0) {
+                true => (z, w),
+                false => (w.clone(), z + w),
+            }
+        }
+    }
+}
+
+pub fn big_fib(n: &BigInt) -> BigInt {
+    big_fibonacci_helper(n).0
 }
