@@ -3,7 +3,7 @@ use divisors::get_divisors;
 
 
 pub fn problem() {
-    let mut n = 28;
+    let mut n = 28u64;
     let mut x = triangle(n);
     while get_divisors(x).len() < 500 {
         n += 1;

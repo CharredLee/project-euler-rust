@@ -1,6 +1,7 @@
 use divisors::get_divisors;
 use num::Num;
 
+pub const PHI: f64 = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890;
 
 pub fn triangle<T: Num + Copy>(n: T) -> T {    // the nth triangular number.
     n * (n + T::one()) / (T::one() + T::one())
@@ -41,4 +42,24 @@ pub fn factorial<T: Num + Copy>(n: T) -> T {
 /// Returns the sum of all divisors of n, other than n.
 pub fn sum_proper_divisors(n: u64) -> u64 {
     get_divisors(n).iter().sum::<u64>()
+}
+
+
+fn fibonacci_helper<T: Num + Copy>(n: T) -> (T, T) {
+    match n == T::zero() {
+        true => (T::zero(), T::one()),
+        false => {
+            let (x, y) = fibonacci_helper(n / (T::one() + T::one()));
+            let (z, w) = (x * (y + y - x), x * x + y * y);
+            match n % (T::one() + T::one()) == T::zero() {
+                true => (z, w),
+                false => (w, z + w)
+            }
+        }
+    }
+}
+
+
+pub fn fib<T: Num + Copy>(n: T) -> T {
+    fibonacci_helper(n).0
 }
