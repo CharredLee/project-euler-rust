@@ -1,5 +1,3 @@
-
-
 pub fn problem() {
     let nums = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
                 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -21,19 +19,15 @@ pub fn problem() {
                 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
                 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
                 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"
-                .split("\n");
+        .split('\n');
     let mut data = [[0_u64; 20]; 20];
-    let mut i: usize = 0;
     let mut j: usize = 0;
-    for row in nums {
-        j = 0;
-        for val in row.split(" ") {
-            if val != "" {
+    for (i, row) in nums.enumerate() {
+        for (j, val) in row.split(' ').enumerate() {
+            if !val.is_empty() {
                 data[i][j] = val.parse::<u64>().unwrap();
-                j += 1;
             }
         }
-        i += 1;
     } // done converting nums into makeshift 2d array
 
     // I know this is gross, but I also know it works, so whatever.
@@ -45,14 +39,14 @@ pub fn problem() {
                 if 3 <= k {
                     let mut _diag_up_prod = 1;
                     for j in 0usize..4 {
-                        _diag_up_prod *= data[i+j][k-j];
+                        _diag_up_prod *= data[i + j][k - j];
                     }
                     answer = answer.max(_diag_up_prod);
                 }
                 if k < 16 {
                     let mut _diag_down_prod = 1;
                     for j in 0usize..4 {
-                        _diag_down_prod *= data[i+j][k+j];
+                        _diag_down_prod *= data[i + j][k + j];
                     }
                     answer = answer.max(_diag_down_prod);
                 }
@@ -62,13 +56,11 @@ pub fn problem() {
             let mut _row_prod = 1;
             let mut _col_prod = 1;
             for j in 0usize..4 {
-                _row_prod *= data[i][k+j];
-                _col_prod *= data[k+j][i];
+                _row_prod *= data[i][k + j];
+                _col_prod *= data[k + j][i];
             }
             answer = answer.max(_row_prod).max(_col_prod);
         }
     }
     println!("answer: {answer}");
 }
-
-

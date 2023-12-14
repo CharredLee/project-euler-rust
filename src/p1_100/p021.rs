@@ -6,7 +6,6 @@ fn naive_sum_proper_divisors(n: u64) -> u64 {
     (1..n).filter(|&x| n % x == 0).sum::<u64>()
 }
 
-
 pub fn problem() {
     let answer = (2..10000)
         .filter(|&n| {
@@ -14,6 +13,6 @@ pub fn problem() {
             n != m && n == naive_sum_proper_divisors(m)
         })
         .sum::<u64>();
-    
+
     println!("answer: {}", answer);
 }

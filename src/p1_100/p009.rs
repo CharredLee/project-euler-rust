@@ -12,25 +12,28 @@ n = (500 - m^2)/m > 0.
 must also verify that n < m, gcd(m, n) == 1, and exactly one of m, n is even.
 */
 
-
 pub fn problem() {
     let mut flag = false;
     let factors = get_divisors(1000);
     let mut numerator: u64;
     let mut n: u64;
     for m in 1_u64..23 {
-        let m2 = m*m;
-        if flag {break}
+        let m2 = m * m;
+        if flag {
+            break;
+        }
         for k in &factors {
-            if *k < m2 {continue}
+            if *k < m2 {
+                continue;
+            }
             numerator = k - m2;
             n = numerator / m;
-            if (m > n) && (numerator > m) && (numerator % m == 0) && ((m%2==0) ^ (n%2==0)) {
+            if (m > n) && (numerator > m) && (numerator % m == 0) && ((m % 2 == 0) ^ (n % 2 == 0)) {
                 flag = true;
                 let triple = euler_method(m, n);
                 let answer = triple[0] * triple[1] * triple[2];
                 println!("answer: {answer}");
-                break
+                break;
             }
         }
     }

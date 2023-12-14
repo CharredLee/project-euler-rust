@@ -1,5 +1,5 @@
-use num::BigUint;
 use cached::proc_macro::cached;
+use num::BigUint;
 
 pub fn problem() {
     let forty = BigUint::from(40u64);
@@ -12,6 +12,6 @@ pub fn problem() {
 fn factorial_naive(n: BigUint) -> BigUint {
     match n == BigUint::from(1u64) {
         true => n,
-        false => &n * factorial_naive(&n - BigUint::new(vec![1]))
+        false => &n * factorial_naive(&n - BigUint::new(vec![1])),
     }
 }

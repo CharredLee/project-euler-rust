@@ -1,5 +1,3 @@
 use super::common::fib;
 
-pub fn problem() {
-    
-}
+pub fn problem() {}

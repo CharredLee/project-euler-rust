@@ -1,8 +1,5 @@
-
-
 pub fn problem() {
-    let data = 
-    "75
+    let data = "75
     95 64
     17 47 82
     18 35 87 10
@@ -18,19 +15,19 @@ pub fn problem() {
     63 66 04 68 89 53 67 30 73 16 69 87 40 31
     04 62 98 27 23 09 70 98 73 93 38 53 60 04 23";
 
-    let binding = data.split('\n')
+    let binding = data
+        .split('\n')
         .map(|line| {
             line.split_whitespace()
                 .map(|s| s.parse::<u32>().unwrap())
                 .collect::<Vec<u32>>()
-            }
-        )
+        })
         .collect::<Vec<_>>();
     let mut values = binding.iter().rev();
     let mut arr = values.next().unwrap().clone();
     for row in values {
         for (i, &val) in row.iter().enumerate() {
-            arr[i] = val + arr[i].max(arr[i+1]);
+            arr[i] = val + arr[i].max(arr[i + 1]);
         }
     }
     let answer = arr[0];

@@ -1,4 +1,3 @@
-
 use num::BigInt;
 
 pub fn problem() {

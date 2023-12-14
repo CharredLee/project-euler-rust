@@ -1,6 +1,5 @@
 use fast_fibonacci::{self, fib_with_mod};
 
-
 pub fn problem() {
     const LIMIT: u64 = 4 * 10_u64.pow(6);
 
@@ -11,6 +10,6 @@ pub fn problem() {
         answer += x;
         i += 3;
         x = fib_with_mod(i, u64::MAX);
-    };
+    }
     println!("The answer is {answer}");
 }
