@@ -1,5 +1,7 @@
 use divisors::get_divisors;
+use itertools::Itertools;
 use num::{BigInt, Num};
+use memoize::memoize;
 
 pub const PHI: f64 = 1.618_033_988_749_895;
 
@@ -83,3 +85,61 @@ fn big_fibonacci_helper(n: &BigInt) -> (BigInt, BigInt) {
 pub fn big_fib(n: &BigInt) -> BigInt {
     big_fibonacci_helper(n).0
 }
+
+
+#[memoize]
+pub fn is_prime(n: u64) -> bool {
+    if n < 2 {
+        return false;
+    } else if n == 2 || n == 3 {
+        return true;
+    } else if n % 2 == 0 || n % 3 == 0 {
+        return false;
+    } else {
+        for i in (5..).step_by(6).take_while(|&i| i * i <= n) {
+            if n % i == 0 || n % (i + 2) == 0 {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+pub fn primes(limit: usize) -> Vec<u64> {
+    let mut out = (0..limit as u64).collect_vec();
+    out[0] = 0;
+    out[1] = 0;
+    for i in 2..limit {
+        if out[i as usize] != 0 {
+            for j in (i * i..limit).step_by(i) {
+                out[j] = 0;
+            }
+        }
+    }
+    out.into_iter()
+       .filter(|&x| x != 0)
+       .collect::<Vec<u64>>()
+}
+
+/*
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn checking_is_prime() {
+        // write tests for is_prime here
+        for i in 0..100 {
+            let primality = match i {
+                2 |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 
+                  | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 
+                  | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 
+                  => true,
+                _ => false,
+            };
+            assert_eq!(is_prime(i), primality);
+        }
+    }
+}
+ */
