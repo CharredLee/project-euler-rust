@@ -4,26 +4,16 @@ use itertools::{partition, Itertools};
 pub fn problem() {
     let b_options = primes(1000)
         .into_iter()
-        .map(|x| x as i128)
-        .collect_vec();
+        .map(|x| x as i128);
     let primes = primes(1_000_000);
-    let mut max = 0;
-    let mut max_a = 0;
-    let mut max_b = 0;
-    // a must be odd
-    for a in (-999..1000).step_by(2) {
-        // b must be prime, and f(39)=39^2+39a+b must be prime, 
-        // hence positive, so b > 39^2+39a
-        for &b in b_options.iter().skip_while(|&&b| b <= 39 * 39 + 39 * a) {
-            let count = consecutive_prime_count(a, b, &primes);
-            if count > max {
-                max = count;
-                max_a = a;
-                max_b = b;
-            }
-        }
-    }
-    println!("answer: {}", max_a * max_b);
+
+    let answer_triple = (-999..1000).step_by(2)
+        .cartesian_product(b_options)
+        .map(|(a, b)| (a, b, consecutive_prime_count(a, b, &primes)))
+        .max_by_key(|&(_, _, count)| count)
+        .unwrap();
+    let answer = answer_triple.0 * answer_triple.1;
+    println!("answer = {}", answer);
 }
 
 fn f(n: i128, a: i128, b: i128) -> i128 {
