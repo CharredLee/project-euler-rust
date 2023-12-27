@@ -99,11 +99,11 @@ pub fn big_fib(n: &BigInt) -> BigInt {
 #[memoize]
 pub fn is_prime(n: u64) -> bool {
     if n < 2 {
-        return false;
+        false
     } else if n == 2 || n == 3 {
-        return true;
+        true
     } else if n % 2 == 0 || n % 3 == 0 {
-        return false;
+        false
     } else {
         for i in (5..).step_by(6).take_while(|&i| i * i <= n) {
             if n % i == 0 || n % (i + 2) == 0 {
@@ -120,7 +120,7 @@ pub fn primes(limit: usize) -> Vec<u64> {
     out[0] = 0;
     out[1] = 0;
     for i in 2..limit {
-        if out[i as usize] != 0 {
+        if out[i] != 0 {
             for j in (i * i..limit).step_by(i) {
                 out[j] = 0;
             }
