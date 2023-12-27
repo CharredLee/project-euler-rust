@@ -3,11 +3,20 @@ use itertools::Itertools;
 use num::{BigInt, Num};
 use memoize::memoize;
 
+
 pub const PHI: f64 = 1.618_033_988_749_895;
 
 pub fn triangle<T: Num + Copy>(n: T) -> T {
     // the nth triangular number.
     n * (n + T::one()) / (T::one() + T::one())
+}
+
+pub fn sum_of_squares<T: Num + Copy>(n: T) -> T {
+    // the sum of squares 1^2 + ... + n^2.
+    let one = T::one();
+    let two = one + one;
+    let three = two + one;
+    n * (n + one) * (two * n + one) / (two * three)
 }
 
 pub fn multiple_count<T: Num + Copy>(n: T, limit: T) -> T {
@@ -122,24 +131,3 @@ pub fn primes(limit: usize) -> Vec<u64> {
        .collect::<Vec<u64>>()
 }
 
-/*
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn checking_is_prime() {
-        // write tests for is_prime here
-        for i in 0..100 {
-            let primality = match i {
-                2 |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 
-                  | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 
-                  | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 
-                  => true,
-                _ => false,
-            };
-            assert_eq!(is_prime(i), primality);
-        }
-    }
-}
- */
