@@ -114,7 +114,6 @@ pub fn is_prime(n: u64) -> bool {
     }
 }
 
-
 pub fn primes(limit: usize) -> Vec<u64> {
     let mut out = (0..limit as u64).collect_vec();
     out[0] = 0;
@@ -131,3 +130,24 @@ pub fn primes(limit: usize) -> Vec<u64> {
        .collect::<Vec<u64>>()
 }
 
+#[memoize]
+pub fn factorize_naive(n: u64) -> Vec<(u64, usize)> {
+    let mut r = n;
+    if n < 2 {
+        return vec![];
+    } else {
+        for p in primes(n as usize) {
+            let mut temp = 0;
+            while r % p == 0 {
+                temp += 1;
+                r /= p;
+            }
+            if temp > 0 {
+                let mut out = vec![(p, temp)];
+                out.append(&mut factorize_naive(r));
+                return out;
+            }
+        }
+    }
+    vec![(n, 1)]
+}

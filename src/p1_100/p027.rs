@@ -23,7 +23,7 @@ fn f(n: i128, a: i128, b: i128) -> i128 {
 }
 
 /// assumes f(1) is prime
-fn consecutive_prime_count(a: i128, b: i128, primes: &Vec<u64>) -> usize {
+fn consecutive_prime_count(a: i128, b: i128, primes: &[u64]) -> usize {
     let mut count = 1;
     let mut x = f(count, a, b);
     if x > 1_000_000 {
